@@ -28,6 +28,11 @@ knitr::kable(mat, format = "html") %>%
   kable_styling() 
 ```
 
+## Lessons
+
+[Tables](tables/index.html) and [Rmd](tables/index.Rmd).
+
+
 
 ## Find an Error!?
 

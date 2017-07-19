@@ -1,0 +1,73 @@
+---
+title: "Untitled"
+author: "John Muschelli"
+date: "7/19/2017"
+output:
+  html_document: default
+  pdf_document: default
+  word_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+
+```{r}
+library(dplyr)
+library(broom)
+df = data.frame(y = rnorm(1000),
+           x = sample(letters, size = 1000, 
+                      replace = TRUE),
+           stringsAsFactors = FALSE)
+df$y[ sample(1:1000, size = 20)] = NA
+summ = df %>% 
+  group_by(x) %>% 
+  summarize(mean = mean(y, na.rm = TRUE),
+            sd = sd(y, na.rm = TRUE),
+            not_missing = sum(!is.na(y)),
+            n =n())
+summ = summ %>% 
+  filter(x %in% letters[1:5])
+```
+
+```{r}
+library(knitr)
+library(kableExtra)
+summ$z = "Hey I am a very long string and I  want to be wrapped"
+knitr::kable(summ, digits = 2)
+```
+
+```{r}
+knitr::kable(summ, 
+             format = "html") %>% 
+  kable_styling()
+grouped = diff(as.numeric(factor(summ$x)))
+grouped = which(grouped > 0)
+knitr::kable(df, format = "html") %>% 
+  kable_styling() %>% 
+  group_rows("Day 0", 1, grouped[1]) %>% 
+  group_rows("Day 1", grouped[1] + 1, grouped[2]) %>% 
+  group_rows("Day 2", grouped[2] + 1, grouped[3]) %>% 
+  group_rows("Day 3", grouped[3] + 1, grouped[4]) 
+```
+
+
+
+```{r}
+ss = summ %>% as.data.frame
+library(pander)
+pander(ss, round = 2)
+```
+
+
+```{r}
+library(DT)
+datatable(summ) %>% formatRound(columns = c("mean", "sd"))
+```
+
+Look at http://rmarkdown.rstudio.com/lesson-7.html and the Rmd: http://rmarkdown.rstudio.com/demos/6-tables.Rmd
+
+
