@@ -68,6 +68,13 @@ library(DT)
 datatable(summ) %>% formatRound(columns = c("mean", "sd"))
 ```
 
+```{r}
+library(htmlTable)
+htmlTable(summ)
+```
+
+
+
 Look at http://rmarkdown.rstudio.com/lesson-7.html and the Rmd: http://rmarkdown.rstudio.com/demos/6-tables.Rmd
 
 

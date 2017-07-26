@@ -20,19 +20,27 @@ library(pander)
 library(kableExtra)
 mat = matrix(c(
   "Git and GitHub", "https://www.youtube.com/watch?v=utJ-smwHe0M",
-"R Packages", ""
+  "R Packages", "",
+  "ggplot2 and dplyr", "https://youtu.be/B9xpjZ7MVUU"
 ), ncol = 2, byrow = TRUE)
 mat = data.frame(mat, stringsAsFactors = FALSE)
 colnames(mat) = c("Day", "Link to Video")
 knitr::kable(mat, format = "html") %>% 
   kable_styling() 
+rownames(mat) = mat$Day
 ```
 
 ## Lessons
 
 [Tables](tables/index.html) and [Rmd](tables/index.Rmd).
 
+### ggplot2 
 
+[Common Plots in `ggplot2`](ggplot2/common_plots.R), used in [this video](`r mat["ggplot2 and dplyr", "Link to Video"]`)
+
+### dplyr  
+
+[Commonly used verbs in `dplyr`](dplyr/dplyr_verbs.R), used in [this video](`r mat["ggplot2 and dplyr", "Link to Video"]`)
 
 ## Find an Error!?
 
